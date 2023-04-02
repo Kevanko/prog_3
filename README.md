@@ -1,6 +1,5 @@
 # prog_3
 3. bit operations
-#################################################################################
 Purpose of work
 This work consists of two parts.
 
@@ -17,7 +16,6 @@ The highest bit of each byte is a service bit. If there is a 1 in the high bit, 
 The lower 7 bits are used to store part of the number being encoded. We will consider serialization with the Little Endian byte order.
 
 Example
-#################################################################################
 Suppose we need to encode the number 1. In binary code, the one looks like this
 
 0000 0001
@@ -35,24 +33,20 @@ Change the order to Little Endian:
 Add a service bit to each group:
 
 10101100 00000010
-#################################################################################
 In open source projects you can find various ways of implementing this coding method:
 Git: varint.c
 SQLite: lsm1/lsm_varint.c
 Google Protobuf: CodedOutputStream::WriteVarint32ToArray
 
 Task 1
-#################################################################################
 Develop an application that generates 1000000 random numbers and writes them into two binary files. Write the numbers in uncompressed format to the uncompressed.dat file and in varint format to the compressed.dat file. Compare the sizes of the files.
 
 Implement the reading of numbers from the two files. Add a check: the sequences of numbers from the two files must coincide.
 
 Using the format varint is most effective when the vast majority of the numbers have small values. To do the work, use the function of generating random numbers
 
-#################################################################################
 
 UTF-8
-#################################################################################
 A similar task of compact encoding arises when working with texts. You are already familiar with single-byte encodings: ASCII, cp1251, koi8-r and others. The problem is that they use a single byte to encode a character, and a document using one of these encodings cannot contain characters in more than two languages. The problem is solved by using UTF-8 encoding.
 
 You can read more about the history of encodings in Joel Spolsky - The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!).
@@ -111,10 +105,8 @@ Data losses
 There may be data loss in the input stream. For example, given the following sequence: 10001100 11101010 10100011 10001100. The first byte has the form 10xxxxxxxx. This cannot be the first byte, since according to the coding algorithm, it was found that bytes following the first byte take this form. Therefore, part of the data at the beginning was lost. In this case, bytes can be skipped until the byte denoting the beginning of the code is read.
 
 Reverse situation: 11101010 10100011. In this sequence, the first byte indicates that the encoded representation is 3 bytes, but in fact only two are present. This is followed by either the con
-#################################################################################
 
 Task 2
-#################################################################################
 Develop an application to encode and decode numbers using the algorithm described above.
 
 Example of encoding:
@@ -224,4 +216,3 @@ Note: normally a different decomposition is used in similar tasks. The proposed 
 
 Command line arguments
 Processing of command line arguments
-#################################################################################
