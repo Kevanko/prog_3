@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFF_SIZE 4
+#include "header.h"
 
 size_t encode_varint(uint32_t value, uint8_t *buf) {
   assert(buf != NULL);
@@ -66,7 +66,7 @@ void write_rand(const char *uncompress_path, const char *compress_path,
 
   for (int i = 0; i < count; i++) {
     uint32_t num = generate_number();
-    uint8_t buff[BUFF_SIZE] = {0};
+    uint8_t buff[MaxCodeLength] = {0};
     size_t size = encode_varint(num, buff);
 
     fwrite(&num, sizeof(uint32_t), 1, uncompress);

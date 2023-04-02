@@ -4,17 +4,15 @@
 
 #include "header.h"
 
-#define MAX_NUMS 1000000
-
 int main() {
   const char *compress = "compressed.dat", *uncompress = "uncompressed.dat";
 
-  write_rand(uncompress, compress, MAX_NUMS);
+  write_rand(uncompress, compress, MaxNumbers);
   uint32_t *uncom_buff = read_uncompress(uncompress);
   uint32_t *com_buff = read_compress(compress);
 
 
-  for(int i = 0; i < MAX_NUMS; i++)
+  for(int i = 0; i < MaxNumbers; i++)
     if(uncom_buff[i] != com_buff[i]){
       fprintf(stderr, "Not idently");
       return 1;

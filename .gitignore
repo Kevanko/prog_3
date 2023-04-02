@@ -1,1 +1,5 @@
 *first/main
+*.o
+*.a
+*.vscode/
+*coder
