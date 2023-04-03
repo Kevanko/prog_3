@@ -11,7 +11,11 @@ int main(int argv, char **argc) {
   }
   char *command = argc[1], *in_file = argc[2], *out_file = argc[3];
 
-  if(strcmp(command, "encode") != 0 && strcmp(command, "decode") != 0){
+  if (strcmp(command, "encode") == 0) {
+    encode_file(in_file, out_file);
+  } else if (strcmp(command, "decode") == 0) {
+    decode_file(in_file, out_file);
+  } else {
     printf("coder <encode> or <decode>\n");
     return 0;
   }
