@@ -4,9 +4,9 @@
 #include "command.h"
 
 int main(int argv, char **argc) {
-  /*BF -> 10111111
-  DF BF -> 11011111 10111111
-  DF DF -> 11011111 11011111*/ 
+  /*0xBF -> 10111111
+  0xDF 0xBF -> 11011111 10111111 -> 00000111 11111111 -> 0x7FF
+  0xDF 0xDF -> 11011111 11011111*/ 
 
   if (argv != 4) {
     printf("coder encode <in-file-name> <out-file-name>\n"
