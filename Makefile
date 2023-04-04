@@ -1,6 +1,6 @@
 APP_NAME = coder
 
-CFLAGS = -Wall
+CFLAGS = -Wall -g -O0
 CC = gcc
 
 SRC_DIR = src
