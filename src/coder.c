@@ -83,30 +83,36 @@ uint32_t decode(const CodeUnit *code_unit) {
 }
 int read_next_code_unit(FILE *in, CodeUnit *code_unit) {
   assert(code_unit != NULL);
+  assert(in != NULL);
   uint8_t byte;
-  fread(&byte, sizeof(uint8_t), 1, in);
-
-  if (byte == EOF)
-    return -1;
-
-  int count = get_byte_count(byte);
-  if (count < 0)
-    return -1;
-
-  code_unit->code[0] = byte;
-  code_unit->length = 1;
-
-  for (int i = 1; i < count; i++) {
+  int read_success = 0;
+  while (!read_success){
     fread(&byte, sizeof(uint8_t), 1, in);
-    if (byte == EOF) {
-      return -1;
-    }
-    if (get_byte_count(byte) != 1)
-      return -1;
-    code_unit->code[i] = byte;
-    code_unit->length += 1;
-  }
 
+    if (feof(in))
+      return -1;
+
+    int count = get_byte_count(byte);
+    if (count == -1 || count == 1)
+      continue;
+
+    code_unit->code[0] = byte;
+    code_unit->length = 1;
+    read_success = 1;
+
+    for (int i = 1; i < count; i++) {
+      fread(&byte, sizeof(uint8_t), 1, in);
+      if (feof(in)) {
+        return -1;
+      }
+      if (get_byte_count(byte) != 1){
+        read_success = 0;
+        break;
+      }
+      code_unit->code[i] = byte;
+      code_unit->length += 1;
+    }
+  }
   return 0;
 }
 

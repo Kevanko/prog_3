@@ -31,10 +31,7 @@ int decode_file(const char *in_file_name, const char *out_file_name) {
   uint32_t code_point;
   CodeUnit code_unit;
 
-  while (!feof(in_file)) {
-    if(read_next_code_unit(in_file, &code_unit) < 0)
-      continue;
-
+  while (read_next_code_unit(in_file, &code_unit) != EOF) {
     code_point = decode(&code_unit);
     if (code_point == -1)
       continue;
