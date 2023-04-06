@@ -118,6 +118,7 @@ int read_next_code_unit(FILE *in, CodeUnit *code_unit) {
 
 int write_code_unit(FILE *out, const CodeUnit *code_unit) {
   assert(code_unit != NULL);
+  assert(out != NULL);
   int count = get_byte_count(code_unit->code[0]);
   if (count == -1 || count == 1)
     return -1;

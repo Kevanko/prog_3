@@ -14,9 +14,10 @@ int main() {
 
   for(int i = 0; i < MaxNumbers; i++)
     if(uncom_buff[i] != com_buff[i]){
-      fprintf(stderr, "Not idently");
+      fprintf(stderr, "Not identity");
       return 1;
     }
+  fprintf(stdout, "Identity\n");
 
   free(uncom_buff);
   free(com_buff);
