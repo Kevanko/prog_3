@@ -46,7 +46,7 @@ int decode_file(const char *in_file_name, const char *out_file_name) {
 
 int test_file(const char *str, const char *out_file_name) {
   FILE *out_file = fopen(out_file_name, "wb");
-    if (!out_file)
+  if (!out_file)
     return -1;
   uint32_t code_point;
   CodeUnit code_unit;
