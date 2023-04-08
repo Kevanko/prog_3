@@ -19,6 +19,8 @@ int main(int argv, char **argc) {
     encode_file(in_file, out_file);
   } else if (strcmp(command, "decode") == 0) {
     decode_file(in_file, out_file);
+  } else if (strcmp(command, "test") == 0) {
+    test_file(in_file, out_file);
   } else {
     printf("coder <encode> or <decode>\n");
     return 0;

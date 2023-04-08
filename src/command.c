@@ -43,3 +43,16 @@ int decode_file(const char *in_file_name, const char *out_file_name) {
   fclose(out_file);
   return 0;
 }
+
+int test_file(const char *str, const char *out_file_name) {
+  FILE *out_file = fopen(out_file_name, "wb");
+    if (!out_file)
+    return -1;
+  uint32_t code_point;
+  CodeUnit code_unit;
+  sscanf(str, "%" SCNx32, &code_point);
+  encode(code_point, &code_unit);
+  fwrite(code_unit.code, sizeof(uint8_t), code_unit.length, out_file);
+  fclose(out_file);
+  return 0;
+}
